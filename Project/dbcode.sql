@@ -1,0 +1,24 @@
+create table stations(stop_id varchar(10), stop_code integer, stop_name Varchar(30), stop_desc varchar(10), stop_lat integer ,	stop_lon Integer	,zone_id	Integer, 
+stop_url varchar(30),	location_type varchar(10),	parent_station varchar(10));
+create table trips(route_id varchar(5),	service_id varchar(15),	trip_id	varchar(30),trip_headsign varchar(30),	direction_id integer,	block_id integer,	shape_id varchar(15));
+create table stop_timing(trip_id varchar(30),	arrival_time time,	departure_time time,	stop_id varchar(10),	stop_sequence integer,	stop_headsign varchar(15),	pickup_type integer,	drop_off_type integer,	shape_dist_traveled integer);
+create table routes(route_id varchar(5),	agency_id varchar(15),	route_short_name varchar(5),	route_long_name	varchar(30),route_desc varchar(100),	route_type	integer, route_url varchar(50),	route_color varchar(15),	route_text_color varchar(30));
+ show tables;
+ select * from stations;
+ SHOW VARIABLES LIKE 'secure_file_priv';
+ SELECT @@global.secure_file_priv;
+ select * from stations;
+ select route_id,trip_id FROM trips group by route_id,trip_id;
+ select route_id,trip_id from (select distinct route_id, trip_id from trips) group by route_id;
+ select route_id,trip_id from trips group by 1,2;
+ select distinct route_id from trips;
+ select max(trip_id) from trips where route_id = 7;
+ select* from stop_timing where arrival_time = '25:01:30';
+ select trip_id from trips where route_id =  (select DISTINCT route_id FROM trips);
+ select arrival_time,departure_time,stop_id,stop_sequence from stop_timing where trip_id ="A20160612WKD_149900_1..N02R";
+select route_id from trips where trip_id = "A20160612WKD_148850_7..N97R";
+select count(*) FROM stations;
+select stop_id FROM stations;
+select stop_name FROM stations where stop_id ="H09";
+select stop_id from stations where stop_name="Sheepshead Bay ";
+select * from stop_timing;
